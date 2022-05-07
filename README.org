@@ -1,0 +1,8 @@
+* gnosis
+
+An emacs plugin based on org-mode to record words.
+
+** Functions
+
+*** record-current-word
+~record-current-word~ records the word at current point and insert an orgmode heading with tag ~gnosis~.
