@@ -18,7 +18,23 @@
 (defun link-current-word-to-link (link)
   (org-insert-link nil link 'current-word))
 
+(defun my-kill-thing-at-point (thing)
+  "Kill the `thing-at-point' for the specified kind of THING."
+  (let ((bounds (bounds-of-thing-at-point thing)))
+    (if bounds
+        (kill-region (car bounds) (cdr bounds))
+      (error "No %s at point" thing))))
+
+(defun my-kill-word-at-point ()
+  "Kill the word at point."
+  (interactive)
+  (my-kill-thing-at-point 'word))
+  
 (defun link-current-word ()
   (interactive)
-  (org-insert-link nil "https://dictionary.cambridge.org/" ))
+  (let ((word (current-word)))
+    (progn
+      (my-kill-word-at-point)
+      (insert
+       (format "[[https://dictionary.cambridge.org/dictionary/english/%s][%s]]" word word)))))
 
