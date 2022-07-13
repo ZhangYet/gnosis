@@ -38,3 +38,11 @@
       (insert
        (format "[[https://dictionary.cambridge.org/dictionary/english/%s][%s]]" word word)))))
 
+(defun link-content-in-current-heading ()
+  "Link the word under current heading"
+  (interactive)
+  (save-restriction
+    (org-narrow-to-subtree)
+    (goto-char (point-min))
+    (while (forward-word)
+      (link-current-word))))
